@@ -23,6 +23,7 @@ public class JobView extends View {
 
     @Getter private TextField textField_jobName;
     @Getter private TextField textField_outputFolder;
+    @Getter private TextField textField_zipPassword;
 
     @Getter private ListView<String> fileList;
 
@@ -76,6 +77,9 @@ public class JobView extends View {
         textField_outputFolder = new TextField();
         textField_outputFolder.setPromptText("Output Folder Path");
 
+        textField_zipPassword = new TextField();
+        textField_zipPassword.setPromptText("Zip Archive Password");
+
         fileList = new ListView<>();
         fileList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
@@ -116,6 +120,7 @@ public class JobView extends View {
         JFXHelper.setTooltip(button_cancel, "Cancels job creation and returns to the main screen.");
 
         JFXHelper.setTooltip(textField_jobName, "The name of the job. This must be unique.");
+        JFXHelper.setTooltip(textField_zipPassword, "The password that will be required to open the encoded zip file.\nLeave this blank to generate an unprotected file.");
 
         JFXHelper.setTooltip(comboBox_jobType, "The type of the job.");
 
@@ -148,16 +153,16 @@ public class JobView extends View {
      *         The job details area.
      */
     private Pane createJobDetailsArea() {
-        // Add job type & name side-by-side
         final HBox typeNamePane = new HBox(comboBox_jobType, textField_jobName);
         HBox.setHgrow(textField_jobName, Priority.ALWAYS);
 
-        // Add output folder field/button side-by-side:
         final HBox outputPane = new HBox(textField_outputFolder, button_selectOutputFolder);
         HBox.setHgrow(textField_outputFolder, Priority.ALWAYS);
 
-        // Add panes to a VBox
-        final VBox vBox = new VBox(typeNamePane, outputPane);
+        final HBox zipPane = new HBox( textField_zipPassword);
+        HBox.setHgrow(textField_zipPassword, Priority.ALWAYS);
+
+        final VBox vBox = new VBox(typeNamePane, zipPane, outputPane);
         HBox.setHgrow(vBox, Priority.ALWAYS);
 
         return vBox;

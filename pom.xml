@@ -73,23 +73,6 @@
             </resource>
         </resources>
         <plugins>
-            <!-- Allows the program to be run using exec:java VIA maven. -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <mainClass>com.valkryst.Schillsaver.Driver</mainClass>
-                </configuration>
-            </plugin>
-
             <!--- Creates a JAR of the source files in the target directory during build. -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -109,7 +92,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.1.1</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -124,12 +107,13 @@
             <plugin>
                 <groupId>org.apache.maven.surefire</groupId>
                 <artifactId>surefire</artifactId>
-                <version>2.21.0</version>
+                <version>3.0.0-M4</version>
             </plugin>
 
             <!-- Used to include all of the dependencies in the packaged Jar file -->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.2.0</version>
                 <configuration>
                     <archive>
                         <manifest>
